@@ -1,0 +1,31 @@
+version: "3" # optional since v1.27.0
+services:
+  #traefik:
+  #  image: "traefik:v2.7"
+  #  container_name: "traefik"
+  #  command:
+  #    #- "--log.level=DEBUG"
+  #    - "--api.insecure=true"
+  #    - "--providers.docker=true"
+  #    - "--providers.docker.exposedbydefault=false"
+  #    - "--entrypoints.web.address=:81"
+  #  ports:
+  #    - "81:81"
+  #    - "8080:8080"
+  #  volumes:
+  #    - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  karn-engine:
+    image: ${REGISTRY:-karn}/karn-engine:${TAG:-latest}
+    container_name: karn-engine
+    #labels:
+    #  - "traefik.enable=true"
+    #  - "traefik.http.routers.camunda.rule=Host(`camunda.localhost`)"
+    #  - "traefik.http.routers.camunda.entrypoints=web"
+    #depends_on:
+    #  - 
+    environment:
+      - AZURE_ACCOUNT_STORAGE_CONNECTION_STRING=${KARN_AZURE_ACCOUNT_STORAGE_CONNECTION_STRING}
+    #volumes:
+    #  - ../certificates/output/:usr/app
+    
